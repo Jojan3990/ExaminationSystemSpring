@@ -3,32 +3,31 @@ package com.rightfindpro.become.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "user_exam")
 public class UserExam {
 
-   @Id
+    @Id
+    private Integer id;
+
     @ManyToOne
-    @JoinColumn(name = "user_id_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
 
 
-   @Id
+
+
     @ManyToOne
-    @JoinColumn(name = "exam_id_id")
+    @JoinColumn(name = "exam_id", referencedColumnName = "id")
     private Exam examId;
 
-    private Date completed_date;
+    private Date completedDate;
 
-    public Exam getExamId() {
-        return examId;
-    }
 
-    public User getUserId() {
-        return userId;
-    }
 }

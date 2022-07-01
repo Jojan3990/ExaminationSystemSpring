@@ -1,7 +1,7 @@
 package com.rightfindpro.become.domain;
 
-import javax.persistence.Column;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,15 +13,15 @@ public class Exam {
     @Column(nullable = false)
     private String title;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course courseId;
 
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH} )
+    @ManyToMany
     @JoinTable(name = "exam_question",
             joinColumns = @JoinColumn(name = "exam_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "question_id", referencedColumnName = "id"))
-    private Set<Question> questions;
+    private Set<Question> questions = new HashSet<>();
 
 }

@@ -4,32 +4,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 
-@Getter
-@Setter
 
 @Entity
+@Getter
+@Setter
 public class Choice {
 
     @Id
     @GeneratedValue
     private Integer id;
 
-
     @ManyToOne
-    @JoinColumn(name = "question_id_id")
-    private Question questionId;
+    @JoinColumn(name = "question_id")
+    private Question question;
 
     @Column(nullable = false)
-    private String choice;
+    private String name;
 
     @Column(nullable = false)
     private double score;
-
-    public Question getQuestionId() {
-        return questionId;
-    }
 
 
 }
