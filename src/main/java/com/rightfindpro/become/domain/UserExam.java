@@ -3,7 +3,6 @@ package com.rightfindpro.become.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,8 +18,6 @@ public class UserExam {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
-
-
 
 
     @ManyToOne

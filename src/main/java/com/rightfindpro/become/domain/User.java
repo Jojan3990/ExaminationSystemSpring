@@ -1,19 +1,17 @@
 package com.rightfindpro.become.domain;
 
-import lombok.Data;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
-
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
 
 @Entity
-@Table(name ="user")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -34,7 +32,11 @@ public class User {
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
 
 
 }

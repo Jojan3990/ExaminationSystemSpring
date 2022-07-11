@@ -5,10 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1656643104346-1" author="tiwar (generated)">
-        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807"
-                        minValue="1" sequenceName="hibernate_sequence" startValue="1"/>
-    </changeSet>
+
     <changeSet id="1656643104346-2" author="tiwar (generated)">
         <createTable tableName="choice">
             <column name="id" type="BIGINT">
@@ -20,16 +17,12 @@
             <column name="name" type="CLOB"/>
             <column name="score" type="NUMBER(0)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-3" author="tiwar (generated)">
         <createTable tableName="course">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="courses_pkey"/>
             </column>
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-4" author="tiwar (generated)">
         <createTable tableName="exam">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="exam_pkey"/>
@@ -37,22 +30,16 @@
             <column name="name" type="VARCHAR"/>
             <column name="course_id" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-5" author="tiwar (generated)">
         <createTable tableName="exam_question">
             <column name="exam_id" type="INT"/>
             <column name="question_id" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-6" author="tiwar (generated)">
         <createTable tableName="question">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="question_pkey"/>
             </column>
             <column name="question" type="VARCHAR"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-7" author="tiwar (generated)">
         <createTable tableName="role">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="role_pkey"/>
@@ -61,8 +48,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-8" author="tiwar (generated)">
         <createTable tableName="user">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="user_pkey"/>
@@ -72,15 +57,11 @@
             <column name="password" type="VARCHAR(255)"/>
             <column name="username" type="VARCHAR(255)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-9" author="tiwar (generated)">
         <createTable tableName="user_choice">
             <column name="user_id" type="INT"/>
             <column name="choice_id" type="INT"/>
             <column name="exam_id" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-10" author="tiwar (generated)">
         <createTable tableName="user_exam">
             <column name="user_id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="user_exam_pkey"/>
@@ -91,64 +72,40 @@
             <column name="completed_date" type="date"/>
             <column name="display_order" type="SMALLINT(5)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-11" author="tiwar (generated)">
         <createTable tableName="user_role">
             <column name="user_id" type="INT"/>
             <column name="role_id" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet id="1656643104346-12" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="choice_id" baseTableName="user_choice" constraintName="choice_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="choice"/>
-    </changeSet>
-    <changeSet id="1656643104346-13" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="exam" constraintName="course_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="course"/>
-    </changeSet>
-    <changeSet id="1656643104346-14" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="exam_id" baseTableName="exam_question" constraintName="exam_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="exam"/>
-    </changeSet>
-    <changeSet id="1656643104346-15" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="exam_id" baseTableName="user_choice" constraintName="exam_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="exam"/>
-    </changeSet>
-    <changeSet id="1656643104346-16" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="exam_id" baseTableName="user_exam" constraintName="exam_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="exam"/>
-    </changeSet>
-    <changeSet id="1656643104346-17" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="question_id" baseTableName="choice" constraintName="question_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="question"/>
-    </changeSet>
-    <changeSet id="1656643104346-18" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="question_id" baseTableName="exam_question"
                                  constraintName="question_id" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="question"/>
-    </changeSet>
-    <changeSet id="1656643104346-19" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role" constraintName="role_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="role"/>
-    </changeSet>
-    <changeSet id="1656643104346-20" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_choice" constraintName="user_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="user"/>
-    </changeSet>
-    <changeSet id="1656643104346-21" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_exam" constraintName="user_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="user"/>
-    </changeSet>
-    <changeSet id="1656643104346-22" author="tiwar (generated)">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role" constraintName="user_id"
                                  onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="user"/>

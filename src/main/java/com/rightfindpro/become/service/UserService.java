@@ -3,7 +3,6 @@ package com.rightfindpro.become.service;
 
 import com.rightfindpro.become.domain.Role;
 import com.rightfindpro.become.domain.User;
-import com.rightfindpro.become.repository.RoleRepository;
 import com.rightfindpro.become.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,9 +17,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-
 @Service
-public class UserService  implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -38,7 +36,7 @@ public class UserService  implements UserDetailsService {
                 user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
-    private Collection< ? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles){
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 }
