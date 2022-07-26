@@ -16,12 +16,12 @@ public class UserExam {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user", referencedColumnName = "id")
     private User userId;
 
 
     @ManyToOne
-    @JoinColumn(name = "exam_id", referencedColumnName = "id")
+    @JoinColumn(name = "exam", referencedColumnName = "id")
     private Exam examId;
 
     private Date completedDate;

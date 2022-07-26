@@ -17,7 +17,7 @@ public class Choice {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "question")
     private Question question;
 
     @Column(nullable = false)

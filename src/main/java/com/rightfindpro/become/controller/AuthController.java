@@ -5,9 +5,9 @@ import com.rightfindpro.become.domain.Role;
 import com.rightfindpro.become.domain.User;
 import com.rightfindpro.become.repository.RoleRepository;
 import com.rightfindpro.become.repository.UserRepository;
-import com.rightfindpro.become.security.dto.LoginDto;
-import com.rightfindpro.become.security.dto.SignUpDto;
-import com.rightfindpro.become.security.dto.UserInfoResponse;
+import com.rightfindpro.become.dto.LoginDto;
+import com.rightfindpro.become.dto.SignUpDto;
+import com.rightfindpro.become.dto.user.UserInfoResponse;
 import com.rightfindpro.become.security.jwt.JwtUtils;
 import com.rightfindpro.become.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collections;
@@ -33,6 +29,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/auth")
 public class AuthController {
 

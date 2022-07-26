@@ -3,6 +3,7 @@ package com.rightfindpro.become.service;
 
 import com.rightfindpro.become.domain.Role;
 import com.rightfindpro.become.domain.User;
+import com.rightfindpro.become.dto.user.UserInfoResponse;
 import com.rightfindpro.become.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,7 +33,10 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
        /* try {
-            Optional<User> user = userRepository.findByUsername(username);
+           Optional <User> user = userRepository.findByUsername(username);
+           user = user.ifPresentOrElse(user1->user=Optional.of(user1),()->userRepository.findByEmail(username));
+
+
             return UserDetailsImpl.build(user);
         } catch (UsernameNotFoundException un) {
             try {
@@ -41,9 +45,8 @@ public class UserService implements UserDetailsService {
 
 
             }
-        }
-*/
-        User user = userRepository.findByUsername(username)
+        }*/
+        User user = userRepository.getUserByEmailOrUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
         return UserDetailsImpl.build(user);
@@ -52,6 +55,7 @@ public class UserService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
+
 }
 
 

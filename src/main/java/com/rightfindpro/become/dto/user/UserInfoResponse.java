@@ -1,4 +1,4 @@
-package com.rightfindpro.become.security.dto;
+package com.rightfindpro.become.dto.user;
 
 import java.util.List;
 

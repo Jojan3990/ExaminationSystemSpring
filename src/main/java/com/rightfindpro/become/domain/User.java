@@ -30,8 +30,8 @@ public class User {
     private String password;
     @ManyToMany
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
 
     public void addRole(Role role) {

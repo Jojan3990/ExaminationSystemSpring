@@ -1,9 +1,17 @@
 package com.rightfindpro.become.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
+@Setter
+@Getter
+@AllArgsConstructor
 @Entity
 public class Exam {
     @Id
@@ -11,11 +19,11 @@ public class Exam {
     private Integer id;
 
     @Column(nullable = false)
-    private String title;
+    private String name;
 
-    @OneToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id")
-    private Course courseId;
+    @ManyToOne
+    @JoinColumn(name = "course", referencedColumnName = "id")
+    private Course course;
 
 
     @ManyToMany
@@ -24,4 +32,7 @@ public class Exam {
             inverseJoinColumns = @JoinColumn(name = "question_id", referencedColumnName = "id"))
     private Set<Question> questions = new HashSet<>();
 
+    public Exam() {
+
+    }
 }
