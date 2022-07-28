@@ -12,7 +12,7 @@ import java.util.List;
 public class ExamController {
 @Autowired ExamService examService;
     @GetMapping("/{course}")
-    public List<Exam> getExamsByCourse(@RequestParam @PathVariable("course") Integer course){
+    public List<Exam> getExamsByCourse(@PathVariable("course") Integer course){
         return examService.listExams(course);
     }
 
