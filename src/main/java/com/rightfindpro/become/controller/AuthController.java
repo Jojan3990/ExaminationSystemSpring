@@ -1,9 +1,8 @@
 package com.rightfindpro.become.controller;
 
 
-import com.rightfindpro.become.domain.Role;
 import com.rightfindpro.become.domain.User;
-import com.rightfindpro.become.repository.RoleRepository;
+import com.rightfindpro.become.mapping.SignUpDtoMapper;
 import com.rightfindpro.become.repository.UserRepository;
 import com.rightfindpro.become.dto.LoginDto;
 import com.rightfindpro.become.dto.SignUpDto;
@@ -19,11 +18,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,10 +37,7 @@ public class AuthController {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private SignUpDtoMapper signUpDtoMapper;
 
 
 
@@ -83,17 +77,7 @@ public class AuthController {
         if (userRepository.existsByEmail(signUpDto.getEmail())) {
             return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
         }
-
-        // create user object
-        User user = new User();
-        user.setName(signUpDto.getName());
-        user.setUsername(signUpDto.getUsername());
-        user.setEmail(signUpDto.getEmail());
-        user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
-
-        Role role = roleRepository.findByName("user").get();
-        user.setRoles(Collections.singleton(role));
-
+        User user = signUpDtoMapper.toUser(signUpDto);
         userRepository.save(user);
 
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
