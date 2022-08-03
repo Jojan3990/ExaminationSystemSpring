@@ -18,7 +18,7 @@ public class AdminController {
 
     @GetMapping("/all")
     public String admin() {
-        return ("<h1> Admin</h1>");
+        return ("<p>Admin</p>");
     }
 //courses
 

@@ -25,7 +25,7 @@ public class UserController {
         return (List<User>) userRepository.findAll();
     }
 
-    @GetMapping("user-list")
+    @GetMapping("/user-list")
     public ResponseEntity<PageDto> getAllUsers(
             @RequestParam(defaultValue = "user") String role,
             @RequestParam(defaultValue = "0") int page,

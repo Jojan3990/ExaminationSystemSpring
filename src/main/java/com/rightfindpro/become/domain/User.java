@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "public")
-public class User implements BaseEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
