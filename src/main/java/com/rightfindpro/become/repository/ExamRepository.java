@@ -22,5 +22,7 @@ public interface ExamRepository extends JpaRepository<Exam, Integer> {
 
     Optional<Exam> findById(Integer id);
 
+    List<Exam> findAllByQuestions(Integer id);
+
 
 }

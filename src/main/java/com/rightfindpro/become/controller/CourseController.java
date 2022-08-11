@@ -1,16 +1,14 @@
 package com.rightfindpro.become.controller;
 
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.domain.Exam;
+import com.rightfindpro.become.dto.CourseDto;
 import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.mapping.PageDtoMapper;
-import com.rightfindpro.become.repository.CourseRepository;
+import com.rightfindpro.become.mapper.CourseDtoMapper;
 import com.rightfindpro.become.service.CourseService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,32 +17,26 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/courses")
 public class CourseController {
-    @Autowired
-    CourseService courseService;
 
+    private CourseDtoMapper courseMapper;
     @Autowired
-    CourseRepository courseRepository;
+    private CourseService courseService;
+
+
 
     @GetMapping(value = {"", "/"})
     public List<Course> getCourses() {
         return courseService.getAllCourses();
     }
 
-    @GetMapping("courses")
-    public ResponseEntity<PageDto> getAllCourses(
+    @GetMapping("/all")
+    public ResponseEntity<PageDto<Course>> getAllCourses(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
     ) {
-        try {
-            Pageable paging = PageRequest.of(page, size);
-            PageDtoMapper<Course> pageDtoMapper = new PageDtoMapper();
-            Page<Course> pageUsers = courseRepository.findAll(paging);
-            PageDto pageDto = pageDtoMapper.toPageResponse(pageUsers);
-            return new ResponseEntity<>(pageDto, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+       return new ResponseEntity<>(courseService.findAllCourses(page, size), HttpStatus.OK);
     }
+
 
     @PostMapping("/CreateNewCourse")
     public Course createNewCourse(@RequestBody Course course) {
@@ -53,10 +45,10 @@ public class CourseController {
 
     }
 
-    @GetMapping("/course?={course}")
-    public List<Exam> getExamsByCourse(@RequestParam @PathVariable("course") Integer course) {
-        return courseRepository.getExamsById(course);
-    }
+   /* @GetMapping("/{course}/exam")
+    public List<Exam> getExamsByCourse( @PathVariable("course") Integer course) {
+        return courseService.getExamsById(course);
+    }*/
 //getCourseByID
 
     //

@@ -1,4 +1,4 @@
-package com.rightfindpro.become.mapping;
+package com.rightfindpro.become.mapper;
 
 import com.rightfindpro.become.dto.PageDto;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;

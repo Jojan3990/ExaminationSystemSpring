@@ -1,4 +1,4 @@
-package com.rightfindpro.become.mapping;
+package com.rightfindpro.become.mapper;
 
 import com.rightfindpro.become.domain.Role;
 import com.rightfindpro.become.domain.User;

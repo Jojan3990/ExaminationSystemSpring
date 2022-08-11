@@ -2,7 +2,7 @@ package com.rightfindpro.become.controller;
 
 
 import com.rightfindpro.become.domain.User;
-import com.rightfindpro.become.mapping.SignUpDtoMapper;
+import com.rightfindpro.become.mapper.SignUpDtoMapper;
 import com.rightfindpro.become.repository.UserRepository;
 import com.rightfindpro.become.dto.LoginDto;
 import com.rightfindpro.become.dto.SignUpDto;

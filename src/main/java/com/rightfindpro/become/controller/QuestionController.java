@@ -1,7 +1,8 @@
 package com.rightfindpro.become.controller;
 
+import com.rightfindpro.become.domain.Exam;
 import com.rightfindpro.become.domain.Question;
-import com.rightfindpro.become.domain.User;
+import com.rightfindpro.become.dto.PageDto;
 import com.rightfindpro.become.repository.QuestionRepository;
 import com.rightfindpro.become.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,7 @@ public class QuestionController {
 
     @Autowired
     QuestionService questionService;
-    @Autowired
-    QuestionRepository questionRepository;
+
 
     @GetMapping(value = {"", "/"})
     public List<Question> getQuestions() {
@@ -39,28 +39,18 @@ public class QuestionController {
 
     }
 
-    public ResponseEntity<Map<String, Object>> getAllQuestios(
+    @GetMapping("/exam")
+    public List<Question> getQuestionsByExam(@RequestParam Exam exam){
+
+        return questionService.getQuestionsByExam(exam.getId());
+
+    }
+
+    public ResponseEntity<PageDto> getAllQuestios(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
     ) {
-        try {
-            List<Question> questions = new ArrayList<Question>();
-            Pageable paging = PageRequest.of(page, size);
-
-            Page<Question> pageQuestions;
-
-            pageQuestions = questionRepository.findAll(paging);
-            questions = pageQuestions.getContent();
-            Map<String, Object> response = new HashMap<>();
-            response.put("questions", questions);
-            response.put("currentPage", pageQuestions.getNumber());
-            response.put("totalItems", pageQuestions.getTotalElements());
-            response.put("totalPages", pageQuestions.getTotalPages());
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        return questionService.findAllQuestions(page, size);
         //Delete
         //Patch
 
