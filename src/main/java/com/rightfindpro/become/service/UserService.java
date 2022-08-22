@@ -1,6 +1,7 @@
 package com.rightfindpro.become.service;
 
 
+import com.rightfindpro.become.Exception.ApiRequestException;
 import com.rightfindpro.become.domain.Role;
 import com.rightfindpro.become.domain.User;
 import com.rightfindpro.become.dto.PageDto;
@@ -52,7 +53,8 @@ public class UserService implements UserDetailsService {
             }
         }*/
         User user = userRepository.getUserByEmailOrUserName(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+                .orElseThrow(() -> new ApiRequestException("Username not found: " , HttpStatus.NOT_FOUND));
+
 
         return UserDetailsImpl.build(user);
     }

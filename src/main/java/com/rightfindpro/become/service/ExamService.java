@@ -1,5 +1,7 @@
 package com.rightfindpro.become.service;
 
+import com.rightfindpro.become.Exception.ApiRequestException;
+import com.rightfindpro.become.domain.Course;
 import com.rightfindpro.become.domain.Exam;
 import com.rightfindpro.become.dto.PageDto;
 import com.rightfindpro.become.mapper.PageDtoMapper;
@@ -30,7 +32,7 @@ public class ExamService {
     }
 
     public Exam getExam(Integer id) {
-        return examRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Exam not found"));
+        return examRepository.findById(id).orElseThrow(()->new ApiRequestException("Exam not found",HttpStatus.NOT_FOUND));
     }
 
     public List<Exam> getExamByCourse(Integer id) {
@@ -49,6 +51,16 @@ public class ExamService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public String deleteExam(Integer id) {
+        {
+            Exam exam = examRepository.findById(id)
+                    .orElseThrow(() -> new ApiRequestException("Course Not Found.", HttpStatus.NOT_FOUND));
+            examRepository.delete(exam);
+            return "Exam deleted sucessfully";
+        }
+    }
+
 
 
 

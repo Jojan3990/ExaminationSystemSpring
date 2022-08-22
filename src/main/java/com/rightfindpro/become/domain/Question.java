@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -22,8 +23,12 @@ public class Question {
     private String question;
 
     @JsonBackReference
-    @ManyToMany(mappedBy = "questions")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "questions")
     private Set<Exam> exams;
+
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
+    private Set<Choice> choices = new HashSet<>();
 
 
     public Question() {

@@ -1,5 +1,6 @@
 package com.rightfindpro.become.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,11 +27,15 @@ public class Exam {
     private Course course;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "exam_question",
             joinColumns = @JoinColumn(name = "exam_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "question_id", referencedColumnName = "id"))
     private Set<Question> questions = new HashSet<>();
+
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "exams")
+    private Set<Choice> choices;
 
     public Exam() {
 

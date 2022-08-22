@@ -3,9 +3,7 @@ package com.rightfindpro.become.controller;
 import com.rightfindpro.become.domain.Role;
 import com.rightfindpro.become.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -18,5 +16,9 @@ public class RoleController {
     public Role createNewRole(@RequestBody Role role) {
         return roleService.createNewRole(role);
 
+    }
+    @DeleteMapping("/Role/{id}")
+    public void deleteRole(@PathVariable("id") int id) {
+        roleService.deleteRole(id);
     }
 }

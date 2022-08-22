@@ -45,6 +45,13 @@ public class CourseController {
 
     }
 
+    @DeleteMapping("/Course/{id}")
+    public void deleteCourse(@PathVariable("id") int id) {
+        courseService.deleteCourseById(id);;
+    }
+
+
+
    /* @GetMapping("/{course}/exam")
     public List<Exam> getExamsByCourse( @PathVariable("course") Integer course) {
         return courseService.getExamsById(course);

@@ -34,6 +34,13 @@ public class ExamController {
 
 
     }
+    @DeleteMapping("/Exam/{id}")
+    public void deleteExam(@PathVariable("id") int id) {
+        examService.deleteExam(id);
+    }
+
+    //Question list
+    //+ Choices
 
 
     //list of questions

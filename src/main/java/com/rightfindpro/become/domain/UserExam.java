@@ -6,24 +6,24 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
-@Getter
+/*@Getter
 @Setter
 @Entity
-@Table(name = "user_exam", schema = "public")
+@Table(name = "user_exam", schema = "public")*/
 public class UserExam {
 
-    @Id
+    /*@Id
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
 
 
     @ManyToOne
-    @JoinColumn(name = "exam", referencedColumnName = "id")
+    @JoinColumn(name = "exam_id", referencedColumnName = "id")
     private Exam examId;
-
+*/
     private Date completedDate;
 
 

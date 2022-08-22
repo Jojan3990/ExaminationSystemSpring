@@ -14,4 +14,8 @@ public class RoleService {
     public Role createNewRole(Role role) {
         return roleRepository.save(role);
     }
+    public void deleteRole(Integer id) {
+        roleRepository.deleteById(id);
+    }
+
 }

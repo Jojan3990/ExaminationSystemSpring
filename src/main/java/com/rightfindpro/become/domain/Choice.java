@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -16,8 +17,8 @@ public class Choice {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "question")
+    @ManyToOne()
+    @JoinColumn(name = "question_id")
     private Question question;
 
     @Column(nullable = false)
@@ -26,17 +27,18 @@ public class Choice {
     @Column(nullable = false)
     private double score;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_choice",
             joinColumns = @JoinColumn(name = "choice_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private Set<Role> users;
+    private Set<User> users = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_choice",
             joinColumns = @JoinColumn(name = "choice_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "exam_id", referencedColumnName = "id"))
-    private Set<Role> exams;
+    private Set<Exam> exams = new HashSet<>();
+
 
 
 }
