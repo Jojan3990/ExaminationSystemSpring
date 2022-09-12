@@ -2,7 +2,10 @@ package com.rightfindpro.become.controller;
 
 import com.rightfindpro.become.domain.Choice;
 import com.rightfindpro.become.domain.Question;
+import com.rightfindpro.become.dto.Choice.ChoiceResponse;
 import com.rightfindpro.become.dto.PageDto;
+import com.rightfindpro.become.dto.Question.QuestionDto;
+import com.rightfindpro.become.mapper.QuestionMapper;
 import com.rightfindpro.become.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ public class QuestionController {
 
     @Autowired
     QuestionService questionService;
+    QuestionMapper questionMapper;
 
 
     @GetMapping(value = {"", "/"})
@@ -30,8 +34,9 @@ public class QuestionController {
     }
 
     @GetMapping("/{exam}")
-    public List<Question> getQuestionsByExam(@PathVariable("exam") Integer exam) {
-        return questionService.listQuestions((exam));
+    public List<QuestionDto> getQuestionsByExam(@PathVariable("exam") Integer exam) {
+       List<Question> questions=  questionService.listQuestions(exam);
+        return questionMapper.toDto((questions));
     }
 
     @GetMapping("/questionsv1")
@@ -43,6 +48,13 @@ public class QuestionController {
         //Delete
         //Patch
 
+
+    }
+
+    @GetMapping("/exam/{id}")
+    public List<QuestionDto> getAllQuestionsByExam(@PathVariable("id") int id) {
+        List<Question> questions = questionService.listQuestions(id);
+        return questionMapper.toDto(questions);
 
     }
 

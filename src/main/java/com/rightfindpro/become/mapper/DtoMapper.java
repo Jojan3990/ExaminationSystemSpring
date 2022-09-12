@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class DtoMapper {
     private ModelMapper modelMapper;
 
-    public <T, S> S converToEntity(T data, Class<S> type) {
+    public <T, S> S convertToEntity(T data, Class<S> type) {
         return modelMapper.map(data, type);
     }
     public <T, S> S toDto(T data, Class<S> type) {

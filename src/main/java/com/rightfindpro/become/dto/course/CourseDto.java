@@ -1,4 +1,4 @@
-package com.rightfindpro.become.dto;
+package com.rightfindpro.become.dto.course;
 
 import lombok.Getter;
 import lombok.Setter;

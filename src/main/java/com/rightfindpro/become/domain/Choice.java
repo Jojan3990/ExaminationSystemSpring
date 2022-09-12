@@ -1,5 +1,6 @@
 package com.rightfindpro.become.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,13 +12,14 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Choice {
 
     @Id
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne()
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
     private Question question;
 

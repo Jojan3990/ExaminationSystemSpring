@@ -2,6 +2,7 @@ package com.rightfindpro.become.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.rightfindpro.become.dto.Question.QuestionDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,15 +24,17 @@ public class Question {
     private String question;
 
     @JsonBackReference
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "questions")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "questions")
     private Set<Exam> exams;
 
     @JsonBackReference
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
     private Set<Choice> choices = new HashSet<>();
 
 
     public Question() {
 
     }
+
+
 }

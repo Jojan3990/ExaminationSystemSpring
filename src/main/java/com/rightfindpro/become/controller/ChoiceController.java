@@ -2,7 +2,9 @@ package com.rightfindpro.become.controller;
 
 import com.rightfindpro.become.domain.Choice;
 import com.rightfindpro.become.domain.Course;
+import com.rightfindpro.become.dto.Choice.ChoiceResponse;
 import com.rightfindpro.become.dto.PageDto;
+import com.rightfindpro.become.mapper.ChoiceMapper;
 import com.rightfindpro.become.service.ChoiceService;
 import com.rightfindpro.become.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class ChoiceController {
 
     @Autowired
     private ChoiceService choiceService;
+    @Autowired
+    private ChoiceMapper choiceMapper;
 
 
     @GetMapping(value = {"", "/"})
@@ -40,4 +44,18 @@ public class ChoiceController {
         return choiceService.createNewChoice(choice);
 
     }
+
+    @GetMapping("/question/{id}")
+    public List<ChoiceResponse> getAllCoursesByQuestion(@PathVariable("id") int id) {
+        List<Choice> choices = choiceService.getAllChoicesByQuestion(id);
+        return choiceMapper.toDto(choices);
+
+    }
+    /*@GetMapping("/question/{id}")
+    public List<ChoiceResponse> getAllCoursesByQuestion(@PathVariable("id") int id) {
+        List<Choice> choices = choiceService.getAllChoicesByQuestion(id);
+        return choiceMapper.toDto(choices);
+
+    }*/
+
 }

@@ -11,6 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 public class QuestionResponse {
     private Integer id;
     private String question;
-    private Choice[] choice;
+    private int score;
 
 }

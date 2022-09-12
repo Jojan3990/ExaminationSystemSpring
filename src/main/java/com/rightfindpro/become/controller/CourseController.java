@@ -1,14 +1,11 @@
 package com.rightfindpro.become.controller;
 
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.dto.CourseDto;
 import com.rightfindpro.become.dto.PageDto;
 import com.rightfindpro.become.mapper.CourseDtoMapper;
 import com.rightfindpro.become.service.CourseService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

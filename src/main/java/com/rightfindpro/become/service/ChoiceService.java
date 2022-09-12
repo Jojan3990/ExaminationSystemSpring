@@ -1,6 +1,7 @@
 package com.rightfindpro.become.service;
 
 import com.rightfindpro.become.domain.Choice;
+import com.rightfindpro.become.dto.Choice.ChoiceResponse;
 import com.rightfindpro.become.repository.ChoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,10 @@ public class ChoiceService {
     }
     public void deleteChoiceById(int id) {
         choiceRepository.deleteById(id);
+    }
+
+    public List<Choice> getAllChoicesByQuestion(int id) {
+        return choiceRepository.findAllChoiceByQuestionId(id);
     }
 }
 

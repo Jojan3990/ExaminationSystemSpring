@@ -6,6 +6,7 @@ import com.rightfindpro.become.domain.Course;
 import com.rightfindpro.become.domain.Exam;
 import com.rightfindpro.become.domain.Question;
 import com.rightfindpro.become.dto.PageDto;
+import com.rightfindpro.become.dto.Question.QuestionDto;
 import com.rightfindpro.become.mapper.PageDtoMapper;
 import com.rightfindpro.become.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jmx.export.naming.IdentityNamingStrategy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -48,8 +50,22 @@ public class QuestionService {
 
 
     public List<Question> listQuestions(Integer examId) {
-        return questionRepository.findByExam(examId);
+         return questionRepository.findByExam(examId);
     }
+    
+
+
+    /*public void addQuestion(QuestionDto questionDto) {
+        Question question = getQuestionFromDto(questionDto);
+        questionRepository.save(question);
+    }*/
+
+   /* public void updateQuestion(Integer questionID, QuestionDto questionDto) {
+        Question question = getQuestionFromDto(questionDto);
+        question.setId(questionID);
+        questionRepository.save(question);
+    }
+    */
 
   /*  public List<Course> listCourses(Integer id) {
         return questionRepository.findById(id);

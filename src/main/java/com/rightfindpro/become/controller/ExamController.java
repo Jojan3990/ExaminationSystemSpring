@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/exams")
 public class ExamController {
@@ -38,6 +39,8 @@ public class ExamController {
     public void deleteExam(@PathVariable("id") int id) {
         examService.deleteExam(id);
     }
+
+
 
     //Question list
     //+ Choices
