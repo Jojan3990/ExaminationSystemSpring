@@ -1,7 +1,6 @@
 package com.rightfindpro.become.repository;
 
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.domain.Exam;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

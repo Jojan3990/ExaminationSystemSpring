@@ -1,8 +1,8 @@
 package com.rightfindpro.become.service;
 
 
-import com.rightfindpro.become.domain.AuthenticatedUser;
-import com.rightfindpro.become.domain.User;
+import com.rightfindpro.become.user.AuthenticatedUser;
+import com.rightfindpro.become.user.User;
 import com.rightfindpro.become.dto.PageDto;
 import com.rightfindpro.become.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

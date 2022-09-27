@@ -1,9 +1,9 @@
 package com.rightfindpro.become.choice;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.rightfindpro.become.domain.Exam;
-import com.rightfindpro.become.domain.Question;
-import com.rightfindpro.become.domain.User;
+import com.rightfindpro.become.exam.Exam;
+import com.rightfindpro.become.question.Question;
+import com.rightfindpro.become.user.User;
 import lombok.Getter;
 import lombok.Setter;
 

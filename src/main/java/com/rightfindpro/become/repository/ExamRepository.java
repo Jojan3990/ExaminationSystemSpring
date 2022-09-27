@@ -1,12 +1,8 @@
 package com.rightfindpro.become.repository;
 
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.domain.Exam;
-import com.rightfindpro.become.domain.Question;
-import com.rightfindpro.become.service.QuestionService;
-import org.springframework.data.domain.Sort;
+import com.rightfindpro.become.exam.Exam;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;

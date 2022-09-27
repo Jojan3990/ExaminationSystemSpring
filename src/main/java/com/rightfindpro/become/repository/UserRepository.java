@@ -1,6 +1,6 @@
 package com.rightfindpro.become.repository;
 
-import com.rightfindpro.become.domain.User;
+import com.rightfindpro.become.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

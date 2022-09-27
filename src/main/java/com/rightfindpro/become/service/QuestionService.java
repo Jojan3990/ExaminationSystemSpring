@@ -2,7 +2,7 @@ package com.rightfindpro.become.service;
 
 import com.rightfindpro.become.Exception.ApiRequestException;
 import com.rightfindpro.become.domain.Choice;
-import com.rightfindpro.become.domain.Question;
+import com.rightfindpro.become.question.Question;
 import com.rightfindpro.become.dto.PageDto;
 import com.rightfindpro.become.mapper.PageDtoMapper;
 import com.rightfindpro.become.repository.QuestionRepository;

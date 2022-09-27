@@ -1,7 +1,7 @@
 package com.rightfindpro.become.repository;
 
 import com.rightfindpro.become.domain.Choice;
-import com.rightfindpro.become.domain.Question;
+import com.rightfindpro.become.question.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
