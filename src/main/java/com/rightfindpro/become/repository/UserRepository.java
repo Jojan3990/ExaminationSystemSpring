@@ -11,11 +11,11 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    Optional<User> findByEmail(String email);
+    User findByEmail(String email);
 
     @Query("from User  where email = :username or username = :username")
     Optional <User> getUserByEmailOrUserName(@Param("username") String username);
-    Optional<User> findByUsername(String username);
+    User findByUsername(String username);
 
     List<User> findAll();
 
@@ -23,4 +23,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Boolean existsByEmail(String email);
 
+    void delete(Optional<User> userToDelete);
 }

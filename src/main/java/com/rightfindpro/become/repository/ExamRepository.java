@@ -4,6 +4,7 @@ import com.rightfindpro.become.domain.Course;
 import com.rightfindpro.become.domain.Exam;
 import com.rightfindpro.become.domain.Question;
 import com.rightfindpro.become.service.QuestionService;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -25,4 +26,5 @@ public interface ExamRepository extends JpaRepository<Exam, Integer> {
     List<Exam> findAllByQuestions(Integer id);
 
 
+    List<Exam> findAllByUserId(Integer userId);
 }

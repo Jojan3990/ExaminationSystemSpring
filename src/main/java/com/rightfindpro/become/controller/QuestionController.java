@@ -33,11 +33,11 @@ public class QuestionController {
         return questionService.createNewQuestion(question);
     }
 
-    @GetMapping("/{exam}")
+   /* @GetMapping("/{exam}")
     public List<QuestionDto> getQuestionsByExam(@PathVariable("exam") Integer exam) {
        List<Question> questions=  questionService.listQuestions(exam);
         return questionMapper.toDto((questions));
-    }
+    }*/
 
     @GetMapping("/questionsv1")
     public ResponseEntity<PageDto> getAllQuestions(
@@ -52,9 +52,9 @@ public class QuestionController {
     }
 
     @GetMapping("/exam/{id}")
-    public List<QuestionDto> getAllQuestionsByExam(@PathVariable("id") int id) {
+    public List<Question> getAllQuestionsByExam(@PathVariable("id") int id) {
         List<Question> questions = questionService.listQuestions(id);
-        return questionMapper.toDto(questions);
+        return questions;
 
     }
 

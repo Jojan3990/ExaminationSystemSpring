@@ -28,7 +28,7 @@ public class Question {
     private Set<Exam> exams;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
     private Set<Choice> choices = new HashSet<>();
 
 

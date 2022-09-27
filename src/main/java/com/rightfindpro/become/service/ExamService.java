@@ -1,8 +1,8 @@
 package com.rightfindpro.become.service;
 
+import com.nimbusds.oauth2.sdk.Response;
 import com.rightfindpro.become.Exception.ApiRequestException;
-import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.domain.Exam;
+import com.rightfindpro.become.domain.*;
 import com.rightfindpro.become.dto.PageDto;
 import com.rightfindpro.become.mapper.PageDtoMapper;
 import com.rightfindpro.become.repository.ExamRepository;
@@ -10,17 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ExamService {
 
     @Autowired
     ExamRepository examRepository;
+    QuestionService questionService;
 
     public List<Exam> getAllExams() {
         return examRepository.findAll();
@@ -60,8 +62,22 @@ public class ExamService {
             return "Exam deleted sucessfully";
         }
     }
+    public Result checkAnswers(Exam exam, List<Response> answersBundle) {
+        Result results = new Result();
+
+        for (Question question : exam.getQuestions()) {
+            boolean isFound = false;
+
+        }
 
 
+        return results;
+    }
+
+    public Page<Exam> findExamsByUser(Integer userId, Pageable pageable) {
+        return (Page<Exam>) examRepository.findAllByUserId(userId);
+    }
 
 
+   
 }

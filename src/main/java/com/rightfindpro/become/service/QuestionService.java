@@ -2,11 +2,8 @@ package com.rightfindpro.become.service;
 
 import com.rightfindpro.become.Exception.ApiRequestException;
 import com.rightfindpro.become.domain.Choice;
-import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.domain.Exam;
 import com.rightfindpro.become.domain.Question;
 import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.dto.Question.QuestionDto;
 import com.rightfindpro.become.mapper.PageDtoMapper;
 import com.rightfindpro.become.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jmx.export.naming.IdentityNamingStrategy;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +25,7 @@ public class QuestionService {
     QuestionRepository questionRepository;
 
     public Question getQuestion(Integer id) {
-        return questionRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Question not found"));
+        return questionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Question not found"));
     }
 
 
@@ -38,19 +33,17 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-   /* public List<Question> listQuestions(Integer examId) {
-        List<Question> questionList = questionRepository.findAll();
-        return questionList;
-    }*/
+    /* public List<Question> listQuestions(Integer examId) {
+         List<Question> questionList = questionRepository.findAll();
+         return questionList;
+     }*/
     public Question createNewQuestion(Question Question) {
         return questionRepository.save(Question);
     }
 
 
-
-
     public List<Question> listQuestions(Integer examId) {
-         return questionRepository.findByExam(examId);
+        return questionRepository.findQuestionsByExams(examId);
     }
     
 
@@ -79,7 +72,7 @@ public class QuestionService {
             Page<Question> questionPage = questionRepository.findAll(pageable);
             PageDto pageDto = pageDtoMapper.toPageResponse(questionPage);
             return new ResponseEntity<>(pageDto, HttpStatus.OK);
-        }catch (Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -90,13 +83,14 @@ public class QuestionService {
 
     public String deleteQuestionById(int id) {
 
-            Question question = questionRepository.findById(id).orElseThrow(()->new ApiRequestException("Question Not Found.", HttpStatus.NOT_FOUND));
-            questionRepository.delete(question);
-            return "Question deleted sucessfully";
+        Question question = questionRepository.findById(id).orElseThrow(() -> new ApiRequestException("Question Not Found.", HttpStatus.NOT_FOUND));
+        questionRepository.delete(question);
+        return "Question deleted sucessfully";
     }
 
     public Set<Choice> choices(int id) {
-        Question question = questionRepository.findById(id).orElseThrow(()->new ApiRequestException("Question Not Found.", HttpStatus.NOT_FOUND));;
+        Question question = questionRepository.findById(id).orElseThrow(() -> new ApiRequestException("Question Not Found.", HttpStatus.NOT_FOUND));
+        ;
         Set<Choice> choices = question.getChoices();
         return choices;
     }
