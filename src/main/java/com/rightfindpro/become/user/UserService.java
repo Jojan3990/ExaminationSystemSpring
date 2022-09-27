@@ -1,10 +1,7 @@
-package com.rightfindpro.become.service;
+package com.rightfindpro.become.user;
 
 
-import com.rightfindpro.become.user.AuthenticatedUser;
-import com.rightfindpro.become.user.User;
-import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.repository.UserRepository;
+import com.rightfindpro.become.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

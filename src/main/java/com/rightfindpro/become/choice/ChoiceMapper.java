@@ -1,8 +1,6 @@
 package com.rightfindpro.become.choice;
 
 import com.rightfindpro.become.domain.Choice;
-import com.rightfindpro.become.choice.ChoiceResponse;
-import com.rightfindpro.become.service.ChoiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -2,12 +2,12 @@ package com.rightfindpro.become.security;
 
 
 import com.rightfindpro.become.user.User;
-import com.rightfindpro.become.repository.UserRepository;
+import com.rightfindpro.become.user.UserRepository;
 import com.rightfindpro.become.user.LoginDto;
 import com.rightfindpro.become.user.SignUpDto;
 import com.rightfindpro.become.user.UserInfoResponse;
 import com.rightfindpro.become.security.jwt.JwtUtils;
-import com.rightfindpro.become.service.UserDetailsImpl;
+import com.rightfindpro.become.user.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

@@ -3,7 +3,7 @@ package com.rightfindpro.become.security;
 import com.rightfindpro.become.domain.Role;
 import com.rightfindpro.become.user.User;
 import com.rightfindpro.become.user.SignUpDto;
-import com.rightfindpro.become.repository.RoleRepository;
+import com.rightfindpro.become.user.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

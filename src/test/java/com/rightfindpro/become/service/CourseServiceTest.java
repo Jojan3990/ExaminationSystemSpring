@@ -1,7 +1,8 @@
 package com.rightfindpro.become.service;
 
+import com.rightfindpro.become.course.CourseService;
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.repository.CourseRepository;
+import com.rightfindpro.become.course.CourseRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

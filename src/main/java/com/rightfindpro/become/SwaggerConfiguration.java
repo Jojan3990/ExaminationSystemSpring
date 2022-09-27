@@ -1,4 +1,4 @@
-package com.rightfindpro.become.configuration;
+package com.rightfindpro.become;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

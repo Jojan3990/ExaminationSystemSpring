@@ -1,8 +1,6 @@
 package com.rightfindpro.become.exam;
 
-import com.rightfindpro.become.exam.Exam;
-import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.service.ExamService;
+import com.rightfindpro.become.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

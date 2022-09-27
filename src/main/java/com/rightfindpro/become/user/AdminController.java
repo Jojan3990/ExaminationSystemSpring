@@ -2,8 +2,8 @@ package com.rightfindpro.become.user;
 
 
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.service.CourseService;
-import com.rightfindpro.become.service.QuestionService;
+import com.rightfindpro.become.course.CourseService;
+import com.rightfindpro.become.question.QuestionService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

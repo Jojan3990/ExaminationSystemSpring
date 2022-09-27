@@ -1,20 +1,16 @@
-package com.rightfindpro.become.service;
+package com.rightfindpro.become.course;
 
 import com.rightfindpro.become.Exception.ApiRequestException;
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.mapper.PageDtoMapper;
-import com.rightfindpro.become.repository.CourseRepository;
+import com.rightfindpro.become.PageDto;
+import com.rightfindpro.become.PageDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

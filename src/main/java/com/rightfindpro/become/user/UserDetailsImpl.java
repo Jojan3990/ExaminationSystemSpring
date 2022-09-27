@@ -1,7 +1,6 @@
-package com.rightfindpro.become.service;
+package com.rightfindpro.become.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.rightfindpro.become.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

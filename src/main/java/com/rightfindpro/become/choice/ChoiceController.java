@@ -2,7 +2,6 @@ package com.rightfindpro.become.choice;
 
 import com.rightfindpro.become.domain.Choice;
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.service.ChoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

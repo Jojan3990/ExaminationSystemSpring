@@ -1,11 +1,9 @@
-package com.rightfindpro.become.service;
+package com.rightfindpro.become.question;
 
 import com.rightfindpro.become.Exception.ApiRequestException;
 import com.rightfindpro.become.domain.Choice;
-import com.rightfindpro.become.question.Question;
-import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.mapper.PageDtoMapper;
-import com.rightfindpro.become.repository.QuestionRepository;
+import com.rightfindpro.become.PageDto;
+import com.rightfindpro.become.PageDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

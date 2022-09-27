@@ -1,10 +1,8 @@
 package com.rightfindpro.become.user;
 
-import com.rightfindpro.become.user.AuthenticatedUser;
 import com.rightfindpro.become.exam.Exam;
-import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.service.ExamService;
-import com.rightfindpro.become.service.UserService;
+import com.rightfindpro.become.PageDto;
+import com.rightfindpro.become.exam.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

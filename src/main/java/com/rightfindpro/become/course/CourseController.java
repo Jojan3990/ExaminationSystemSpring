@@ -1,8 +1,8 @@
 package com.rightfindpro.become.course;
 
 import com.rightfindpro.become.domain.Course;
-import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.service.CourseService;
+import com.rightfindpro.become.PageDto;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

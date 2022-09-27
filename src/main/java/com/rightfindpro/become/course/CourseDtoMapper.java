@@ -1,8 +1,6 @@
 package com.rightfindpro.become.course;
 
-import com.rightfindpro.become.course.CourseDto;
-import com.rightfindpro.become.mapper.DtoMapper;
-import com.rightfindpro.become.service.CourseService;
+import com.rightfindpro.become.DtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;

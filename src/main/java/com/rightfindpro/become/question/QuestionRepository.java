@@ -1,4 +1,4 @@
-package com.rightfindpro.become.repository;
+package com.rightfindpro.become.question;
 
 import com.rightfindpro.become.domain.Choice;
 import com.rightfindpro.become.question.Question;

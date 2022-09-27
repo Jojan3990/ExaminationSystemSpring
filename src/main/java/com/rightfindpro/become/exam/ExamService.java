@@ -1,13 +1,12 @@
-package com.rightfindpro.become.service;
+package com.rightfindpro.become.exam;
 
 import com.nimbusds.oauth2.sdk.Response;
 import com.rightfindpro.become.Exception.ApiRequestException;
 import com.rightfindpro.become.domain.*;
-import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.exam.Exam;
-import com.rightfindpro.become.mapper.PageDtoMapper;
+import com.rightfindpro.become.PageDto;
+import com.rightfindpro.become.PageDtoMapper;
 import com.rightfindpro.become.question.Question;
-import com.rightfindpro.become.repository.ExamRepository;
+import com.rightfindpro.become.question.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

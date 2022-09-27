@@ -1,4 +1,4 @@
-package com.rightfindpro.become.result;
+package com.rightfindpro.become;
 
 public class Result {
     private int totalQuestions = 0;

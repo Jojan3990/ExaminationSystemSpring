@@ -2,6 +2,7 @@ package com.rightfindpro.become.course;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.rightfindpro.become.exam.Exam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

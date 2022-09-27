@@ -1,6 +1,6 @@
 package com.rightfindpro.become.security.jwt;
 
-import com.rightfindpro.become.service.UserDetailsImpl;
+import com.rightfindpro.become.user.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

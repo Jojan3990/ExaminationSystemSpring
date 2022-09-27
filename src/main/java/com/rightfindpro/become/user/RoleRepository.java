@@ -1,4 +1,4 @@
-package com.rightfindpro.become.repository;
+package com.rightfindpro.become.user;
 
 import com.rightfindpro.become.domain.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

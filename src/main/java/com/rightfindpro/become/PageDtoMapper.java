@@ -1,6 +1,6 @@
-package com.rightfindpro.become.mapper;
+package com.rightfindpro.become;
 
-import com.rightfindpro.become.dto.PageDto;
+import com.rightfindpro.become.PageDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

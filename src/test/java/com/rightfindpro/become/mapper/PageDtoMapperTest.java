@@ -1,6 +1,7 @@
 package com.rightfindpro.become.mapper;
 
-import com.rightfindpro.become.dto.PageDto;
+import com.rightfindpro.become.PageDto;
+import com.rightfindpro.become.PageDtoMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

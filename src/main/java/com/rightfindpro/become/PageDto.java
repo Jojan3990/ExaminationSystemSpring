@@ -1,4 +1,4 @@
-package com.rightfindpro.become.dto;
+package com.rightfindpro.become;
 
 import lombok.Data;
 

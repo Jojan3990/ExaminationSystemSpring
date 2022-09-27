@@ -1,8 +1,5 @@
 package com.rightfindpro.become.question;
 
-import com.rightfindpro.become.question.Question;
-import com.rightfindpro.become.question.QuestionDto;
-import com.rightfindpro.become.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

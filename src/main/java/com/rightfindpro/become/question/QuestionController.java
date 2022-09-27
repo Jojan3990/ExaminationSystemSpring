@@ -1,8 +1,7 @@
 package com.rightfindpro.become.question;
 
 import com.rightfindpro.become.domain.Choice;
-import com.rightfindpro.become.dto.PageDto;
-import com.rightfindpro.become.service.QuestionService;
+import com.rightfindpro.become.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

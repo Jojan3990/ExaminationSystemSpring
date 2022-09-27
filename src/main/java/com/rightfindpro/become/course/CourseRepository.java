@@ -1,4 +1,4 @@
-package com.rightfindpro.become.repository;
+package com.rightfindpro.become.course;
 
 import com.rightfindpro.become.domain.Course;
 import org.springframework.data.jpa.repository.JpaRepository;

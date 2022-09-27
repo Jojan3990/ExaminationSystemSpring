@@ -1,4 +1,4 @@
-package com.rightfindpro.become.repository;
+package com.rightfindpro.become.exam;
 
 import com.rightfindpro.become.domain.Course;
 import com.rightfindpro.become.exam.Exam;

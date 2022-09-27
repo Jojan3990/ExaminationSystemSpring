@@ -1,7 +1,6 @@
 package com.rightfindpro.become.user;
 
 import com.rightfindpro.become.domain.Role;
-import com.rightfindpro.become.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

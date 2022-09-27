@@ -1,4 +1,4 @@
-package com.rightfindpro.become.mapper;
+package com.rightfindpro.become;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
