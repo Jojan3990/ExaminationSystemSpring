@@ -8,11 +8,23 @@ public class UserInfoResponse {
     private String email;
     private List<String> roles;
 
+//    public UserInfoResponse(Integer id, String username, String email, List<String> roles) {
+//        this.id = id;
+//        this.username = username;
+//        this.email = email;
+//        this.roles = roles;
+//    }
+
     public UserInfoResponse(Integer id, String username, String email, List<String> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.roles = roles;
+    }
+
+    public UserInfoResponse(String username, List<String> roles) {
+        this.username=username;
+        this.roles=roles;
     }
 
     public Integer getId() {

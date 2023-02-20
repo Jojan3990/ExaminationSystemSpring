@@ -1,11 +1,11 @@
 package com.rightfindpro.become.exam;
 
-import com.nimbusds.oauth2.sdk.Response;
 import com.rightfindpro.become.Exception.ApiRequestException;
-import com.rightfindpro.become.domain.*;
+//import com.rightfindpro.become.domain.*;
 import com.rightfindpro.become.PageDto;
 import com.rightfindpro.become.PageDtoMapper;
-import com.rightfindpro.become.question.Question;
+import com.rightfindpro.become.course.Course;
+import com.rightfindpro.become.course.CourseRepository;
 import com.rightfindpro.become.question.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,14 +15,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExamService {
 
     @Autowired
     ExamRepository examRepository;
+    @Autowired
     QuestionService questionService;
+    @Autowired
+    private CourseRepository courseRepository;
 
     public List<Exam> getAllExams() {
         return examRepository.findAll();
@@ -59,23 +64,36 @@ public class ExamService {
             Exam exam = examRepository.findById(id)
                     .orElseThrow(() -> new ApiRequestException("Course Not Found.", HttpStatus.NOT_FOUND));
             examRepository.delete(exam);
-            return "Exam deleted sucessfully";
+            return "Exam deleted successfully";
         }
     }
-    public Result checkAnswers(Exam exam, List<Response> answersBundle) {
-        Result results = new Result();
+//    public Result checkAnswers(Exam exam, List<Response> answersBundle) {
+//        Result results = new Result();
+//
+//        for (Question question : exam.getQuestions()) {
+//            boolean isFound = false;
+//
+//        }
+//
+//
+//        return results;
+//    }
 
-        for (Question question : exam.getQuestions()) {
-            boolean isFound = false;
+//    public Page<Exam> findExamsByUser(Integer userId, Pageable pageable) {
+//        return (Page<Exam>) examRepository.findAllByUserId(userId);
+//    }
 
-        }
-
-
-        return results;
-    }
-
-    public Page<Exam> findExamsByUser(Integer userId, Pageable pageable) {
-        return (Page<Exam>) examRepository.findAllByUserId(userId);
+//    public Exam createExam(Integer course_id, String exam_name){
+//        Exam exam=new Exam();
+//        exam.setName(exam_name);
+//        Course course=courseRepository.findAllById(course_id).get();
+//        exam.setCourse(Collections.singleton(course));
+//        exam.setCourse(course);
+//        examRepository.save(exam);
+//        return exam;
+//    }
+    public Exam createExam(Exam exam){
+        return examRepository.save(exam);
     }
 
 

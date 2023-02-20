@@ -1,6 +1,6 @@
 package com.rightfindpro.become.user;
 
-import com.rightfindpro.become.domain.Role;
+//import com.rightfindpro.become.domain.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package com.rightfindpro.become.course;
 
 import com.rightfindpro.become.Exception.ApiRequestException;
-import com.rightfindpro.become.domain.Course;
+//import com.rightfindpro.become.domain.Course;
 import com.rightfindpro.become.PageDto;
 import com.rightfindpro.become.PageDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -50,6 +52,21 @@ public class CourseService {
         return "Course deleted sucessfully";
     }
 
+    public ResponseEntity<?> getTotalExamByCourseId(int courseId){
+
+        if(courseRepository.findById(courseId)!=null){
+            if(courseRepository.getTotalExamByCourseId(courseId).isEmpty()){
+                return new  ResponseEntity<>("Exam with id: " + courseId + " not present",HttpStatus.NOT_FOUND);
+            }
+            else {
+                return new ResponseEntity<>(courseRepository.getTotalExamByCourseId(courseId),HttpStatus.OK);
+            }
+        }
+        else {
+            return new  ResponseEntity<>("Course with id: " + courseId + " not found",HttpStatus.NOT_FOUND);
+        }
+
+    }
 
 
 }

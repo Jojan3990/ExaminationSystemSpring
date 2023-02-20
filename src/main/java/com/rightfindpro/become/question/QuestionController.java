@@ -1,8 +1,12 @@
 package com.rightfindpro.become.question;
 
-import com.rightfindpro.become.domain.Choice;
+//import com.rightfindpro.become.domain.Choice;
 import com.rightfindpro.become.PageDto;
+import com.rightfindpro.become.choice.Choice;
+import com.rightfindpro.become.exam.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +20,10 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
     QuestionMapper questionMapper;
+    @Autowired
+    private ExamRepository examRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
 
 
     @GetMapping(value = {"", "/"})
@@ -27,6 +35,9 @@ public class QuestionController {
     public Question createQuestion(@RequestBody Question question) {
         return questionService.createNewQuestion(question);
     }
+
+
+
 
    /* @GetMapping("/{exam}")
     public List<QuestionDto> getQuestionsByExam(@PathVariable("exam") Integer exam) {

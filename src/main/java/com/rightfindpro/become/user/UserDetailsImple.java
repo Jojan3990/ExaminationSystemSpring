@@ -1,67 +1,54 @@
 package com.rightfindpro.become.user;
 
-import com.rightfindpro.become.user.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
-public class AuthenticatedUser implements UserDetails {
+@Data
+public class UserDetailsImple implements UserDetails {
+    private Collection<? extends GrantedAuthority> authorities;
 
-    private static final Integer serialVersionUID = 1;
-
-    private User user;
-
-    public AuthenticatedUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
+    private Integer id;
+    private String username;
+    private String email;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return null;
     }
-
-    public Integer getId() {
-        return user.getId();
-    }
-
-    public String getEmail(){return user.getEmail();}
-
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return null;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return false;
     }
+
 
 }

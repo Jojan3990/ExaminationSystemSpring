@@ -1,6 +1,6 @@
 package com.rightfindpro.become.course;
 
-import com.rightfindpro.become.domain.Course;
+//import com.rightfindpro.become.domain.Course;
 import com.rightfindpro.become.PageDto;
 
 import java.util.List;
@@ -19,7 +19,6 @@ public class CourseController {
     private CourseService courseService;
 
 
-
     @GetMapping(value = {"", "/"})
     public List<Course> getCourses() {
         return courseService.getAllCourses();
@@ -35,10 +34,16 @@ public class CourseController {
 
 
     @PostMapping("/CreateNewCourse")
-    public Course createNewCourse(@RequestBody Course course) {
+    public ResponseEntity<?> createNewCourse(@RequestBody Course course) {
+//        System.out.println(course+"this seems to be null if no message in front");
+//        System.out.println("THis is working");
+        return new ResponseEntity<>(courseService.createNewCourse(course), HttpStatus.OK);
+//        return null;
+    }
 
-        return courseService.createNewCourse(course);
-
+    @GetMapping("/getTotalExamByCourseId/{id}") //should i send course object or Id is fine
+    public ResponseEntity<?> getTotalExamByCourseId(@PathVariable("id") int id){
+        return new ResponseEntity<>(courseService.getTotalExamByCourseId(id),HttpStatus.OK);
     }
 
     @DeleteMapping("/Course/{id}")
@@ -48,10 +53,10 @@ public class CourseController {
 
 
 
-   /* @GetMapping("/{course}/exam")
-    public List<Exam> getExamsByCourse( @PathVariable("course") Integer course) {
-        return courseService.getExamsById(course);
-    }*/
+//    @GetMapping("/{course}/exam")
+//    public List<Exam> getExamsByCourse( @PathVariable("course") Integer course) {
+//        return courseService.getExamsById(course);
+//    }
 //getCourseByID
 
     //

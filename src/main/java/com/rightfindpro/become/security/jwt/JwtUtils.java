@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
@@ -35,7 +36,7 @@ public class JwtUtils {
             }
         }
 
-        public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
+        public ResponseCookie generateJwtCookie(UserDetails  userPrincipal) {
             String jwt = generateTokenFromUsername(userPrincipal.getUsername());
             ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
             return cookie;
@@ -46,6 +47,7 @@ public class JwtUtils {
             return cookie;
         }
 
+        //retrieve username from jwt token
         public String getUserNameFromJwtToken(String token) {
             return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
         }

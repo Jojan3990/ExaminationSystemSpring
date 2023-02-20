@@ -1,6 +1,7 @@
 package com.rightfindpro.become.security;
 
-import com.rightfindpro.become.domain.Role;
+//import com.rightfindpro.become.domain.Role;
+import com.rightfindpro.become.user.Role;
 import com.rightfindpro.become.user.User;
 import com.rightfindpro.become.user.SignUpDto;
 import com.rightfindpro.become.user.RoleRepository;
@@ -28,13 +29,14 @@ public class SignUpDtoMapper {
         User user = new User();
         user.setName(signUpDto.getName());
         user.setUsername(signUpDto.getUsername());
+        System.out.println("This is in signupdtomapper1");
         user.setEmail(signUpDto.getEmail());
+        System.out.println("This is in signupdtomapper2");
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
+        System.out.println("This is in signupdtomapper3");
         Role role = roleRepository.findByName("user").get();
         user.setRoles(Collections.singleton(role));
         return user;
     }
-
-
 
 }

@@ -1,6 +1,6 @@
 package com.rightfindpro.become.choice;
 
-import com.rightfindpro.become.domain.Choice;
+//import com.rightfindpro.become.domain.Choice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

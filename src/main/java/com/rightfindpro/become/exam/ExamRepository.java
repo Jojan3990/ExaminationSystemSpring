@@ -1,9 +1,13 @@
 package com.rightfindpro.become.exam;
 
-import com.rightfindpro.become.domain.Course;
+//import com.rightfindpro.become.domain.Course;
 import com.rightfindpro.become.exam.Exam;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +25,12 @@ public interface ExamRepository extends JpaRepository<Exam, Integer> {
 
     List<Exam> findAllByQuestions(Integer id);
 
+    List<Exam> findExamByUsersId(int userId);//returns all exams related to user with input userId
 
-    List<Exam> findAllByUserId(Integer userId);
+    //query to create exam guving course ID and exam name
+
+//    @Query(value = "insert into exam(name,course_id) values (:exam_name,:course_id)",nativeQuery = true)
+//    ExamDTO createExam(@Param("course_id") Integer courseId, @Param("exam_name") String examName);
+
+//    List<Exam> findAllByUserId(Integer userId);
 }

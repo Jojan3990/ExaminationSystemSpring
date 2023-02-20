@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">redhat</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/become?currentSchema=public</property>
+        <property name="connection_pool_size">10</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+
+        <mapping class="com.rightfindpro.become.user.User" />
+        <mapping class="com.rightfindpro.become.exam.Exam" />
+        <mapping class="com.rightfindpro.become.course.Course" />
+        <mapping class="com.rightfindpro.become.user.Role" />
+        <mapping class="com.rightfindpro.become.choice.Choice" />
+        <mapping class="com.rightfindpro.become.question.Question" />
+
+        <!--        <mapping class="org.javabrains.sanjaya.dto.UserDetails"/>-->
+    </session-factory>
+</hibernate-configuration>
+
+<!--<property name="connection.driver_class">com.mysql.jdbc.Driver</property>-->
+<!--<property name="connection.url">jdbc:mysql://localhost:3306/radioDB</property>-->
+<!--<property name="connection.username">root</property>-->
+<!--<property name="connection.password">root</property>-->
+
+<!--  DBC connection pool (use the built-in) &ndash;&gt;-->
+<!--<property name="connection.pool_size">1</property>-->
+
+<!--      SQL dialect &ndash;&gt;-->
+<!--<property name="dialect">org.hibernate.dialect.MySQLDialect</property>-->
+
+<!--       Enable Hibernate's automatic session context management &ndash;&gt;-->
+<!--      <property name="current_session_context_class">thread</property> &ndash;&gt;-->
+
+<!--       Disable the second-level cache &ndash;&gt;-->
+<!--<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
+
+<!--  Echo all executed SQL to stdout &ndash;&gt;-->
+<!--<property name="show_sql">true</property>-->
+
+<!--<property name="hbm2ddl.auto">validate</property>-->
+
+<!--<mapping class="model.UserDetails" />-->
+
+<!--<mapping class="model.AdminRole" />-->
+
+<!--<mapping class="model.AdminUser" />-->

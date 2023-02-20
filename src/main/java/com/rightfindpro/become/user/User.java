@@ -2,6 +2,11 @@ package com.rightfindpro.become.user;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.rightfindpro.become.choice.Choice;
+import com.rightfindpro.become.exam.Exam;
+import liquibase.pro.packaged.S;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,9 +17,8 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "user_all", schema = "public")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -77,20 +81,41 @@ public class User {
 
     @Column(nullable = false)
     private String password;
-    @ManyToMany
+
+//    @JsonManagedReference(value = "user-role")
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
 
-        @JsonBackReference
+//        @JsonBackReference(value = "choice-user")
         @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
         private Set<Choice> choices;
+
+//        @JsonIgnore
+//        @JsonBackReference(value = "exam-user")
+        @ManyToMany(fetch = FetchType.LAZY,cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+        })
+        @JoinTable(name = "user_exam",joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "exam_id")
+        )
+        private Set<Exam> exams=new HashSet<>();
 
     public void addRole(Role role) {
         this.roles.add(role);
     }
 
+    public void addExam(Exam exam){
+        this.exams.add(exam);
+        exam.getUsers().add(this);
+    }
+    public User(){
 
+    }
+    public User(String name,String username){
 
+    }
 }

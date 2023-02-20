@@ -1,6 +1,7 @@
 package com.rightfindpro.become.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-
 @Entity
 public class Role {
     @Id
@@ -18,8 +18,10 @@ public class Role {
 
     private String name;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "roles")
+
+
+//    @JsonBackReference(value = "user-role")
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "roles")
     private Set<User> users;
 
     @Override

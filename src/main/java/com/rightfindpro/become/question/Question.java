@@ -2,6 +2,8 @@ package com.rightfindpro.become.question;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.rightfindpro.become.choice.Choice;
 import com.rightfindpro.become.exam.Exam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,17 +19,20 @@ import java.util.Set;
 @Entity
 public class Question {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(nullable = false)
     private String question;
 
-    @JsonBackReference
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "questions")
-    private Set<Exam> exams;
+//    @JsonBackReference(value = "exam-question")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(name = "exam_question",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "exam_id"))
+    private Set<Exam> exams=new HashSet<>();
 
-    @JsonBackReference
+    @JsonManagedReference(value = "question-choice")
     @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
     private Set<Choice> choices = new HashSet<>();
 
@@ -36,5 +41,9 @@ public class Question {
 
     }
 
+    public void addExam(Exam exam){
+        this.exams.add(exam);
+        exam.getQuestions().add(this);
+    }
 
 }
