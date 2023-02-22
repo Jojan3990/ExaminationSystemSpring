@@ -20,7 +20,6 @@ public class QuestionMapper {
             questionDtos.add(questionDto);
         }
         return questionDtos;
-
     }
 
     public static QuestionDto toDto(Question question) {

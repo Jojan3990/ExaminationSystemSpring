@@ -61,9 +61,15 @@ public class Exam {
 
 
 
-//    public Set<User> getUsers(){
-//        return users;
-//    }
+    public Set<User> getUsers(){
+        return users;
+    }
+
+    public Set<Question> getQuestions(){
+        return questions;
+    }
+
+
 //
 //    public void setUsers(Set<User> users){
 //        this.users=users;

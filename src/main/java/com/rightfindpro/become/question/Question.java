@@ -46,4 +46,7 @@ public class Question {
         exam.getQuestions().add(this);
     }
 
+    public Set<Choice> getChoices(){
+        return choices;
+    }
 }

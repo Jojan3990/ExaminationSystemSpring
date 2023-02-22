@@ -93,6 +93,9 @@
 			<version>3.1.0</version>
 		</dependency>
 
+<!--		for map struct-->
+
+
 	</dependencies>
 
 	<build>
@@ -108,8 +111,8 @@
 				<configuration>
 					<propertyFile>src/main/resources/application.properties</propertyFile>
 				</configuration>
-
 			</plugin>
+
 		</plugins>
 	</build>
 

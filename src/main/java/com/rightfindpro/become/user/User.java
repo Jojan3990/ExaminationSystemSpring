@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rightfindpro.become.choice.Choice;
 import com.rightfindpro.become.exam.Exam;
 import liquibase.pro.packaged.S;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -112,10 +113,5 @@ public class User {
         this.exams.add(exam);
         exam.getUsers().add(this);
     }
-    public User(){
 
-    }
-    public User(String name,String username){
-
-    }
 }

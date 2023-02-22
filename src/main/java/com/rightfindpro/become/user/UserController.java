@@ -37,8 +37,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+
 
 
 
@@ -88,64 +87,9 @@ public class UserController {
 
 
 
-    @GetMapping("/getExamsNameByUserId/{user_id}")
-    public ResponseEntity<?> getExamsNameByUserIdd(@PathVariable Integer user_id){
-        User user= userRepository.findUserNameById(user_id);
-        if(user!=null){
-            Exam exam=new Exam();
-            List<ArrayList> listStore=new ArrayList();
-            List<Exam> listStoreUserExam=new ArrayList<>();
-            listStore.add((ArrayList) userRepository.getExamsNameByUserId(user_id));
-
-            ExamUserDTO examList= new ExamUserDTO();
-            List<ExamUserDTO> userExamList= new ArrayList<>();
-
-            for (int i = 0; i< listStore.get(0).size(); i++){
-                exam= (Exam) listStore.get(0).get(i);
-                listStoreUserExam.add(exam);
-            }
-            System.out.println(listStoreUserExam.size());
-            for(int i=0;i<listStoreUserExam.size();i++){
-                examList= modelMapper.map(listStoreUserExam.get(i), ExamUserDTO.class);
-                userExamList.add(examList);
-            }
-            return new ResponseEntity<>(userExamList,HttpStatus.OK);
-
-//            Purely using HQl
-
-//            SessionFactory factory=null;
-//            Session session=null;
-//            Configuration configuration=new Configuration().configure();
-//
-////            try {
-////                factory=configuration.buildSessionFactory();
-////                session=factory.openSession();
-////                Transaction tx=session.beginTransaction();
-////                String hql1="SELECT e.name FROM Exam e JOIN e.users u WHERE u.id=:user_id";
-////                Query query=session.createQuery(hql1);
-////                query.setParameter("user_id",user_id);
-////                List<?> user_exam=query.getResultList();
-////                tx.commit();
-////                return new ResponseEntity<>(user_exam,HttpStatus.OK);
-////            }catch (Exception ex){
-////                ex.printStackTrace();
-////                return new ResponseEntity<>("Exception found",HttpStatus.OK);
-////            }finally {
-////                session.close();
-////                factory.close();
-//////                return new ResponseEntity<>(user_exam,HttpStatus.OK);
-////            }
-//            return new ResponseEntity<>(user_exam,HttpStatus.OK);
-//            return new ResponseEntity<>(userRepository.getExamsNameByUserId(user_id),HttpStatus.OK);
-
-
-//            HQL End
-
-        }
-        else{
-            return new ResponseEntity<>("user with id "+user_id+" not found",HttpStatus.NOT_FOUND);
-        }
-
+    @GetMapping("/getExamsNameByUserId/{user_id}") //documentation is important so do documentation
+    public ResponseEntity<?> getExamsNameByUserId(@PathVariable Integer user_id){
+        return userService.getExamsNameByUserId(user_id);
     }
 
 //    @RequestMapping(value = "/myExams", method = RequestMethod.GET)

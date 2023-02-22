@@ -46,7 +46,7 @@ public class Choice {
 //    @JsonManagedReference(value = "choice-exam")
 //    @JsonIdentityInfo()
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_exam",
+    @JoinTable(name = "exam_choice",
             joinColumns = @JoinColumn(name = "choice_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "exam_id", referencedColumnName = "id"))
     private Set<Exam> exams = new HashSet<>();

@@ -1,10 +1,17 @@
 package com.rightfindpro.become.user;
 
 
+import com.jayway.jsonpath.MapFunction;
 import com.rightfindpro.become.PageDto;
+import com.rightfindpro.become.exam.Exam;
+import com.rightfindpro.become.exam.ExamMapper;
+import com.rightfindpro.become.exam.ExamUserDTO;
+import liquibase.pro.packaged.E;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,16 +33,18 @@ public class UserService implements UserDetailsService {
     @Lazy
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     @Lazy
     public UserService(UserRepository userRepository,
-                           PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User saveUser(User user){
+    public User saveUser(User user) {
         if (userRepository.findByEmail(user.getEmail()) != null) {
             System.out.println("The mail " + user.getEmail() + " is already in use");
         }
@@ -66,7 +77,7 @@ public class UserService implements UserDetailsService {
 //        return new UserDetailsImpl(user);
     }
 
-    public User findByUsername(String username){
+    public User findByUsername(String username) {
         System.out.println(username);
         User user = userRepository.findByUsername(username);
 
@@ -95,10 +106,6 @@ public class UserService implements UserDetailsService {
 //    }
 
 
-
-
-
-
     public User findByEmail(String email) {
         User user = userRepository.findByEmail(email);
 
@@ -110,14 +117,60 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User updatePassword(User user, String password)  {
+    public User updatePassword(User user, String password) {
         user.setPassword(passwordEncoder.encode(password));
         return userRepository.save(user);
     }
 
     public ResponseEntity<PageDto> findAllUsers(int page, int size) {
-        return findAllUsers(page,size);
+        return findAllUsers(page, size);
     }
 
 
+    public ResponseEntity<?> getExamsNameByUserId(int user_id) {
+        User user = userRepository.findUserNameById(user_id);
+        if (user != null) {
+            ExamMapper examMapper=new ExamMapper();
+            List<Exam> listStore = userRepository.getExamsNameByUserId(user_id);
+            List<ExamUserDTO> userExamList = new ArrayList<>();
+            for (int i = 0; i < listStore.size(); i++) {
+//                userExamList.add((modelMapper.map(listStore.get(i), ExamUserDTO.class)));
+                userExamList.add( examMapper.toDto(listStore.get(i)));
+            }
+            return new ResponseEntity<>(userExamList, HttpStatus.OK);
+
+//            Purely using HQl
+
+//            SessionFactory factory=null;
+//            Session session=null;
+//            Configuration configuration=new Configuration().configure();
+//
+////            try {
+////                factory=configuration.buildSessionFactory();
+////                session=factory.openSession();
+////                Transaction tx=session.beginTransaction();
+////                String hql1="SELECT e.name FROM Exam e JOIN e.users u WHERE u.id=:user_id";
+////                Query query=session.createQuery(hql1);
+////                query.setParameter("user_id",user_id);
+////                List<?> user_exam=query.getResultList();
+////                tx.commit();
+////                return new ResponseEntity<>(user_exam,HttpStatus.OK);
+////            }catch (Exception ex){
+////                ex.printStackTrace();
+////                return new ResponseEntity<>("Exception found",HttpStatus.OK);
+////            }finally {
+////                session.close();
+////                factory.close();
+//////                return new ResponseEntity<>(user_exam,HttpStatus.OK);
+////            }
+//            return new ResponseEntity<>(user_exam,HttpStatus.OK);
+//            return new ResponseEntity<>(userRepository.getExamsNameByUserId(user_id),HttpStatus.OK);
+
+
+//            HQL End
+
+        } else {
+            return new ResponseEntity<>("user with id " + user_id + " not found", HttpStatus.NOT_FOUND);
+        }
+    }
 }
