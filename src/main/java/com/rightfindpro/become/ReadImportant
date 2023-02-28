@@ -1,0 +1,9 @@
+Controller
+
+I should do entity to DTO mapper in Controller.
+I can use ResponseEntity in Controller.
+
+Service
+
+service should return Entity instead of DTO.
+service shouldn't send any HTTP status.

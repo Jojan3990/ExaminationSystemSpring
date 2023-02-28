@@ -38,30 +38,23 @@ public class UserController {
     private UserRepository userRepository;
 
 
-
-
-
     //this is for test
 
     @GetMapping("/user-list")
-    public ResponseEntity<PageDto> getAllUsers(
-            @RequestParam(defaultValue = "user") String role,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "1") int size
-    ) {
-        return userService.findAllUsers(page,size);
+    public ResponseEntity<PageDto> getAllUsers(@RequestParam(defaultValue = "user") String role, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "1") int size) {
+        return userService.findAllUsers(page, size);
     }
 
     @GetMapping("/userByEmail/{email}")
-    public User getUserByEmail(@PathVariable(value = "email") String email){
+    public User getUserByEmail(@PathVariable(value = "email") String email) {
         return userService.findByEmail(email);
     }
 
     @GetMapping("/userByUsername/{username}")
-    public ResponseEntity<?>  getUserByUserName(@PathVariable(value = "username") String username){
+    public ResponseEntity<?> getUserByUserName(@PathVariable(value = "username") String username) {
 //        System.out.println("This is null ?");
 //        System.out.println(username);
-        return new ResponseEntity<>(userService.findByUsername(username),HttpStatus.OK);
+        return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
     }
 
 //    @RequestMapping(value = "/{user_id}/exams", method = RequestMethod.GET)
@@ -74,25 +67,23 @@ public class UserController {
 //    }
 
     @GetMapping("/getTotalExamsByUser/{user_id}")
-    public ResponseEntity<?> getTotalExamsByUserId(@PathVariable Integer user_id){
-        User user= userRepository.findUserNameById(user_id);
-        if(user!=null){
-            String username=user.getName();
-            return new ResponseEntity<>(username+" has given total of "+userRepository.getTotalExamByUserId(user_id)+" exams",HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>("user with id "+user_id+" not found",HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> getTotalExamsByUserId(@PathVariable Integer user_id) {
+        User user = userRepository.findUserNameById(user_id);
+        if (user != null) {
+            String username = user.getName();
+            return new ResponseEntity<>(username + " has given total of " + userRepository.getTotalExamByUserId(user_id) + " exams", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("user with id " + user_id + " not found", HttpStatus.NOT_FOUND);
         }
     }
-
 
 
     @GetMapping("/getExamsNameByUserId/{user_id}") //documentation is important so do documentation
-    public ResponseEntity<?> getExamsNameByUserId(@PathVariable Integer user_id){
+    public ResponseEntity<?> getExamsNameByUserId(@PathVariable Integer user_id) {
         return userService.getExamsNameByUserId(user_id);
     }
 
-//    @RequestMapping(value = "/myExams", method = RequestMethod.GET)
+    //    @RequestMapping(value = "/myExams", method = RequestMethod.GET)
 //    @PreAuthorize("isAuthenticated()")
 //    @ResponseStatus(HttpStatus.OK)
 //    public Page<Exam> getExamsByCurrentUser(@AuthenticationPrincipal AuthenticatedUser authenticatedUser,
@@ -106,7 +97,7 @@ public class UserController {
         userService.saveUser(user);
     }
 
-  //  @PutMapping("/edit")
+    //  @PutMapping("/edit")
    /* public ResponseEntity<UserInfoResponse> updateUserInfo(@AuthenticationPrincipal User user,
                                                            @Valid @RequestBody UpdateUserRequest request,
                                                            BindingResult bindingResult) {

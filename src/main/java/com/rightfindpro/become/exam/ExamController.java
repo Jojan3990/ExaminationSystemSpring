@@ -3,6 +3,9 @@ package com.rightfindpro.become.exam;
 import com.rightfindpro.become.PageDto;
 import com.rightfindpro.become.question.Question;
 import com.rightfindpro.become.question.QuestionRepository;
+import com.rightfindpro.become.user.User;
+import com.rightfindpro.become.user.UserExamDTO;
+import com.rightfindpro.become.user.UserMapper;
 import com.rightfindpro.become.user.UserRepository;
 import liquibase.pro.packaged.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -26,6 +30,10 @@ public class ExamController {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    UserMapper userMapper;
+
+
     @GetMapping("/{course}")
     public List<Exam> getExamsByCourse(@PathVariable("course") Integer course) {
         return examService.listExams(course);
@@ -36,13 +44,18 @@ public class ExamController {
         return examService.getAllExams();
     }
 
-@GetMapping("/exams")
-    public ResponseEntity<PageDto> getAllExams(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size
-    ) {
+    @GetMapping("/exams")
+    public ResponseEntity<PageDto> getAllExams(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size) {
         return examService.findAllExams(page, size);
     }
+
+
+    @GetMapping("/getUsersNameByExamId/{exam_id}")
+    public List<UserExamDTO> getUsersNameByExamId(@PathVariable int exam_id) {
+        List<User> listStore= examService.getUsersNameByExamId(exam_id);
+        return listStore.stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
     @DeleteMapping("/Exam/{id}")
     public void deleteExam(@PathVariable("id") int id) {
         examService.deleteExam(id);
@@ -57,24 +70,22 @@ public class ExamController {
 //    }
 
     @PostMapping("/createExam")
-    public ResponseEntity<?> createExam(@RequestBody Exam exam){
-
-        return new ResponseEntity<>(examService.createExam(exam),HttpStatus.OK);
+    public ResponseEntity<?> createExam(@RequestBody Exam exam) {
+        return new ResponseEntity<>(examService.createExam(exam), HttpStatus.OK);
     }
 
 
     //for inserting data in user_exam showing many to many relationship
     @PostMapping("/users/{userId}/exams")
-    public ResponseEntity<Exam> addExam(@PathVariable(value = "userId") int userId,@RequestBody Exam examRequest){
+    public ResponseEntity<Exam> addExam(@PathVariable(value = "userId") int userId, @RequestBody Exam examRequest) {
 //        System.out.println("This is user id"+userId);
 //        System.out.println("This is user name"+examRequest.getName());
-        Exam exam=userRepository.findById(userId).map(user -> {
+        Exam exam = userRepository.findById(userId).map(user -> {
             int examId = examRequest.getId();
 
             //exam exists
             if (examId != 0L) {//OL means number zero or type long
-                Exam _exam = examRepository.findById(examId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Not found exam with id =" + examId));
+                Exam _exam = examRepository.findById(examId).orElseThrow(() -> new ResourceNotFoundException("Not found exam with id =" + examId));
                 user.addExam(_exam);
                 userRepository.save(user);
                 return _exam;
@@ -83,21 +94,20 @@ public class ExamController {
             //add and create new Exam
             user.addExam(examRequest);
             return examRepository.save(examRequest);
-        }).orElseThrow(()->new ResourceNotFoundException("Not found user with id ="+userId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Not found user with id =" + userId));
         return new ResponseEntity<Exam>(exam, HttpStatus.CREATED);
     }
 
 
     //exam_question
     @PostMapping("/questions/{questionId}/exams")
-    public ResponseEntity<?> addExamQuestion(@PathVariable(value = "questionId") int questionId,@RequestBody Exam examRequest){
-        Exam exam=questionRepository.findById(questionId).map(question -> {
+    public ResponseEntity<?> addExamQuestion(@PathVariable(value = "questionId") int questionId, @RequestBody Exam examRequest) {
+        Exam exam = questionRepository.findById(questionId).map(question -> {
             int examId = examRequest.getId();
 
             //exam exists
             if (examId != 0L) {//OL means number zero or type long
-                Exam _exam = examRepository.findById(examId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Not found exam with id =" + examId));
+                Exam _exam = examRepository.findById(examId).orElseThrow(() -> new ResourceNotFoundException("Not found exam with id =" + examId));
                 question.addExam(_exam);
                 questionRepository.save(question);
                 return _exam;
@@ -106,10 +116,9 @@ public class ExamController {
             //add and create new Exam
             question.addExam(examRequest);
             return examRepository.save(examRequest);
-        }).orElseThrow(()->new ResourceNotFoundException("Not found question with id ="+questionId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Not found question with id =" + questionId));
         return new ResponseEntity<Exam>(exam, HttpStatus.CREATED);
     }
-
 
 
     //Question list

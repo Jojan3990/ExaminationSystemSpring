@@ -1,5 +1,6 @@
 package com.rightfindpro.become.exam;
 
+import com.rightfindpro.become.GenericMapper;
 import com.rightfindpro.become.question.Question;
 import com.rightfindpro.become.question.QuestionDto;
 import lombok.RequiredArgsConstructor;
@@ -10,15 +11,15 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class ExamMapper {
+public class ExamMapper implements GenericMapper<Exam,ExamUserDTO> {
 
 
-    public static ExamUserDTO toDto(Exam exam) {
+
+
+    public ExamUserDTO toDto(Exam exam) {
         ExamUserDTO examUserDTO = new ExamUserDTO();
         examUserDTO.setId(exam.getId());
         examUserDTO.setName(exam.getName());
         return examUserDTO;
     }
-
-
 }

@@ -16,7 +16,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-
 @Entity
 @Table(name = "user_all", schema = "public")
 public class User {
@@ -83,33 +82,26 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-//    @JsonManagedReference(value = "user-role")
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    //    @JsonManagedReference(value = "user-role")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
 
-//        @JsonBackReference(value = "choice-user")
-        @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-        private Set<Choice> choices;
+    //        @JsonBackReference(value = "choice-user")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    private Set<Choice> choices;
 
-//        @JsonIgnore
+    //        @JsonIgnore
 //        @JsonBackReference(value = "exam-user")
-        @ManyToMany(fetch = FetchType.LAZY,cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-        })
-        @JoinTable(name = "user_exam",joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "exam_id")
-        )
-        private Set<Exam> exams=new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "user_exam", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "exam_id"))
+    private Set<Exam> exams = new HashSet<>();
 
     public void addRole(Role role) {
         this.roles.add(role);
     }
 
-    public void addExam(Exam exam){
+    public void addExam(Exam exam) {
         this.exams.add(exam);
         exam.getUsers().add(this);
     }

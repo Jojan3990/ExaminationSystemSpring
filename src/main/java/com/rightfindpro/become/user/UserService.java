@@ -7,6 +7,8 @@ import com.rightfindpro.become.exam.Exam;
 import com.rightfindpro.become.exam.ExamMapper;
 import com.rightfindpro.become.exam.ExamUserDTO;
 import liquibase.pro.packaged.E;
+import liquibase.pro.packaged.H;
+import liquibase.pro.packaged.R;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -34,12 +37,14 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    ExamMapper examMapper;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
     @Lazy
-    public UserService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -108,11 +113,9 @@ public class UserService implements UserDetailsService {
 
     public User findByEmail(String email) {
         User user = userRepository.findByEmail(email);
-
         if (user == null) {
             System.out.println("User not found");
         }
-
         return user;
     }
 
@@ -130,45 +133,11 @@ public class UserService implements UserDetailsService {
     public ResponseEntity<?> getExamsNameByUserId(int user_id) {
         User user = userRepository.findUserNameById(user_id);
         if (user != null) {
-            ExamMapper examMapper=new ExamMapper();
             List<Exam> listStore = userRepository.getExamsNameByUserId(user_id);
-            List<ExamUserDTO> userExamList = new ArrayList<>();
-            for (int i = 0; i < listStore.size(); i++) {
-//                userExamList.add((modelMapper.map(listStore.get(i), ExamUserDTO.class)));
-                userExamList.add( examMapper.toDto(listStore.get(i)));
+            if (listStore.isEmpty() != true) {
+                return new ResponseEntity<>(listStore.stream().map(examMapper::toDto).collect(Collectors.toList()), HttpStatus.OK);
             }
-            return new ResponseEntity<>(userExamList, HttpStatus.OK);
-
-//            Purely using HQl
-
-//            SessionFactory factory=null;
-//            Session session=null;
-//            Configuration configuration=new Configuration().configure();
-//
-////            try {
-////                factory=configuration.buildSessionFactory();
-////                session=factory.openSession();
-////                Transaction tx=session.beginTransaction();
-////                String hql1="SELECT e.name FROM Exam e JOIN e.users u WHERE u.id=:user_id";
-////                Query query=session.createQuery(hql1);
-////                query.setParameter("user_id",user_id);
-////                List<?> user_exam=query.getResultList();
-////                tx.commit();
-////                return new ResponseEntity<>(user_exam,HttpStatus.OK);
-////            }catch (Exception ex){
-////                ex.printStackTrace();
-////                return new ResponseEntity<>("Exception found",HttpStatus.OK);
-////            }finally {
-////                session.close();
-////                factory.close();
-//////                return new ResponseEntity<>(user_exam,HttpStatus.OK);
-////            }
-//            return new ResponseEntity<>(user_exam,HttpStatus.OK);
-//            return new ResponseEntity<>(userRepository.getExamsNameByUserId(user_id),HttpStatus.OK);
-
-
-//            HQL End
-
+            return new ResponseEntity<>("User with id " + user_id + " has not given any exam", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("user with id " + user_id + " not found", HttpStatus.NOT_FOUND);
         }
